@@ -1,4 +1,4 @@
-# BillMa QQ Bot
+# ✨✨✨BillMa QQ Bot✨✨✨
 
 一个十分~~简陋~~简洁的QQ机器人。不需要Nonebot或者Nonebot2的封装。
 
@@ -16,7 +16,7 @@
 - 可以设置指定IP，端口
 - ~~很沙雕~~
 
-## 快速食用（Release版本）
+## 快速食用（Release版本）🍔
 
 #### 1.下载go-cqhttp和本程序
 
@@ -228,7 +228,7 @@ taboo里面可以填写禁忌字。如果用户输入含有这个列表里面的
 
 随后，先点击cqhttp.bat（由go-cqhttp生成），再**点击botstart.bat（直接点击exe可能会出现一些错误），即可开始。**
 
-## 快速食用（Python版）
+## 快速食用（Python版）🧶
 
 强烈推荐使用vscode来管理本机器人所需的源代码。
 
@@ -410,7 +410,7 @@ servers:
 
 [点击这里了解更多json语法](https://www.runoob.com/json/json-tutorial.html)
 
-## 指令
+## 指令👍
 
 - `.bot arknights`明日方舟模拟抽卡
 - `.bot rc` or `.bot 事件鉴定`事件鉴定，指数越大概率越大
@@ -422,7 +422,7 @@ servers:
 - `.bot 疫情查询`+一个省名（例如江苏省），查询该省疫情（暂不支持市级）
 - 此外，`.bot`  后面直接加句子可以获得聊天功能
 
-## 管理指令
+## 管理指令🎉
 
 首先需要在force.json里的“superadmin”中将自己QQ填上。随后就可以用自己的QQ号使用远程指令操作管理。
 
@@ -437,7 +437,7 @@ servers:
 
 - `.bot set restart`重启机器人
 
-## 环境
+## 环境🎶
 
 本机器人在以下环境测试通过：
 
@@ -447,7 +447,7 @@ servers:
   - Visual Studio Code 2022
   - go-cqhttp windows_amd64
 
-## 使用的开源库
+## 使用的开源库❤
 
 我只是一个高中牲，很菜，没多少技术，因此~~魔改~~借鉴了很多大佬的代码。特将这些开源库列出以示感谢：
 
@@ -457,7 +457,7 @@ servers:
 | [CharlesPikachu/musicdl: Musicdl: A lightweight music downloader written by pure python. (github.com)](https://github.com/CharlesPikachu/musicdl)                                   | 原用途为下载音乐，魔改为直接提取直链 | [Apache-2.0 license](https://github.com/CharlesPikachu/musicdl/blob/master/LICENSE) |
 | [cc004/lifeRestart-py: lifeRestart game in python (github.com)](https://github.com/cc004/lifeRestart-py)                                                                            | 人生重开，但是阉割了自选天赋 的功能  | [AGPL-3.0 license](https://github.com/cc004/lifeRestart-py/blob/main/LICENSE)       |
 
-## 进阶使用
+## 进阶使用😘
 
 本仓库含有以下主要文件：
 
@@ -503,3 +503,20 @@ servers:
 - `2022/5/7 1.1.3 alpha`优化了权限系统
 - `2022/5/8 1.2.0 alpha`新增settings.json，管理设置更加方便了
 - `2022/5/9 1.0.0-rc12 Release`发布，修复大量bug
+
+
+## 关于作者😁
+
+江苏省苏州市的一个普通高中牲，一个因为~玩电脑被学校处分~在省赛就被刷下来的信息学奥林匹克竞赛选手，热爱编程，但不喜欢前端。
+
+欢迎通过以下联系方式与我探讨信息竞赛、博客搭建、学术讨论以及扯皮：
+
+* QQ:36937975
+* Twitter:@billma6688
+* Facebook/Instagram:billma007
+* CodeForces/USACO/AtCoder:billma007(~别看我很拉的~不常用)
+* Email:[maboning237103015@163.com](mailto:maboning237103015@163.com)
+
+## 推广：我的博客🤞
+
+[欢迎光临！](https://billma.top/)
