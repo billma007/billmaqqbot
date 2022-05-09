@@ -106,7 +106,7 @@ def send_msg_private(resp_dict):
         if msg_type == "private":
                 info("即将发送以下信息：\n"+unquote(msg,encoding="utf-8"))
                 payload = "GET /send_private_msg?user_id=" + str(
-            resp_dict['user_id']) +"&message=" + msggg+ " HTTP/1.1\r\nHost:" + ip + ":"+str(port)+"\r\nConnection: close\r\n\r\n"
+            resp_dict['user_id']) +"&message=" + msg+ " HTTP/1.1\r\nHost:" + ip + ":"+str(port)+"\r\nConnection: close\r\n\r\n"
         client.send(payload.encode("utf-8"))
         client.close()
         success("发送成功！")
