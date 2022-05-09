@@ -1,12 +1,20 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+from bot_debug import success,info,error,warning
+info("开始导入模块...")
 import msvcrt
 import sys,os
 from time import sleep
-from bot_debug import success,info,error,warning
+
 import json
 from save_settings import set_value,_init,get_value,init_settings
+success("模块导入成功！")
+info("正在检查配置文件！")
+'''
+检查配置文件是否存在
+'''
+
 sting=True
 if not os.path.isfile("settings.json"):
     with open("settings.json","w",encoding="utf-8") as f:
@@ -51,16 +59,25 @@ if sting==False:
     info("按任意键退出程序进行配置...")
     msvcrt.getch()
     os._exit(0)
-
+success("配置文件检查成功！")
+'''
+初始化设置
+'''
 
 _init()
 init_settings()
+
+info("开始加载权限系统...")
+
 # receive and send message
 from send_msg import  changephone, send_msg_group, send_msg_guild,send_msg_private
 from receive import rev_msg
 
 from bot_changename import changename
 from bot_blacklist import adminlist, blacklist,superadmin
+success("权限系统加载成功！")
+info("开始加载plugin插件....")
+
 # plugin and adapters
 from bot_plugin_jrrp import jrrp
 from bot_plugin_aitalk import aitalk
@@ -70,7 +87,12 @@ from bot_plugin_liferestart import lifemain
 from bot_plugin_dujitang import dujitang
 from bot_plugin_check import check
 from bot_plugin_arknight import arknightsanalysis
+from bot_plugin_historytoday import history_today
+success("插件加载成功！")
 def analysisfunc(msg):
+            '''
+            判断消息类型并处理
+            '''
             msgsend="FATAL ERROR:0001(UNKNOWN ERROR)"
             if msg=="1234567890":
                 msgsend="对不起，您没有权限执行这个操作."
@@ -86,6 +108,8 @@ def analysisfunc(msg):
                 msgsend=arknightsanalysis(msg)
             elif "下载音乐" in msg:
                 msgsend=musicdown(msg)
+            elif "history-today" in msg or "历史上的今天" in msg:
+                msgsend=history_today()
             elif "CQ:image" in msg:
                 msgsend='图片无法识别'
             elif "狗屁不通" in msg:
@@ -105,7 +129,7 @@ if __name__=="__main__":
     while True:
         try:
             info("正在连接http上报器...")
-            changephone("iphone 15 Pro Max")
+            changephone("iphone13.2")
             success("成功连接到http上报器。")
             break
         except:
