@@ -12,10 +12,19 @@ def info(msg):# info
         print("["+timenow()+"][INFO]"+str(msg))
 def success(msg):
         init(autoreset=True)    
-        print(Fore.GREEN+"["+timenow()+"][SUCCESS]"+str(msg))
+        try:
+                print(Fore.LIGHTGREEN_EX+"["+timenow()+"][SUCCESS]"+str(msg))
+        except:
+                print(Fore.GREEN+"["+timenow()+"][SUCCESS]"+str(msg))
 def error(msg):
         init(autoreset=True)    
-        print(Fore.RED+"["+timenow()+"][ERROR]"+str(msg))
+        try:
+                print(Fore.LIGHTRED_EX+"["+timenow()+"][ERROR]"+str(msg))
+        except:
+                print(Fore.RED+"["+timenow()+"][ERROR]"+str(msg))
 def warning(msg):
         init(autoreset=True)    
-        print(Fore.YELLOW+"["+timenow()+"][WARNING]"+str(msg))
+        try:
+                print(Fore.LIGHTYELLOW_EX+"["+timenow()+"][WARNING]"+str(msg))
+        except:
+                print(Fore.YELLOW+"["+timenow()+"][WARNING]"+str(msg))

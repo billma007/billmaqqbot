@@ -1,7 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from bot_debug import info,success,error
+from bot_debug import info,success,error,warning
 import json
+import msvcrt
+import traceback
+import os
 
 def _init():  # 初始化
     info("初始化设置中")
@@ -17,7 +20,13 @@ def set_value(key, value):
         success("成功导入设置"+str(key))
     except:
         error("导入设置失败")
-        raise Exception("导入设置失败")
+        print("=============================")
+        warning(traceback.format_exc())
+        print("=============================")
+        error("导入设置失败，可能会导致程序无法正常运行。建议将已有配置文件删除，再次启动本程序，本程序会自动释放标准配置文件。待修改完毕后再启动本软件，本软件会自动读取。")
+        info("按任意键退出程序进行配置。。。")
+        msvcrt.getch()
+        os._exit(0)
 def init_settings():
     try:
         info("开始导入设置 从settings.json中")
@@ -35,12 +44,23 @@ def init_settings():
         success("成功导入所有设置！")
     except:
         error("致命错误：数据导入失败")
-        raise Exception("致命错误：数据导入失败")
-
+        print("=============================")
+        error(traceback.format_exc())
+        print("=============================")
+        warning("导入设置失败，可能会导致程序无法正常运行。建议将已有配置文件删除，再次启动本程序，本程序会自动释放标准配置文件。待修改完毕后再启动本软件，本软件会自动读取。")
+        info("按任意键退出程序进行配置。。。")
+        msvcrt.getch()
+        os._exit(0)
 def get_value(key):
     # 获得一个全局变量，不存在则提示读取对应变量失败
     try:
         return _global_dict[key]
     except:
         error("获取"+str(key)+"失败")
-        raise Exception("发生错误：获取数据失败")
+        print("=============================")
+        error(traceback.format_exc())
+        print("=============================")
+        warning("导入设置失败，可能会导致程序无法正常运行。建议将已有配置文件删除，再次启动本程序，本程序会自动释放标准配置文件。待修改完毕后再启动本软件，本软件会自动读取。")
+        info("按任意键退出程序进行配置。。。")
+        msvcrt.getch()
+        os._exit(0)

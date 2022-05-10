@@ -6,7 +6,7 @@ info("开始导入模块...")
 import msvcrt
 import sys,os
 from time import sleep
-
+import traceback
 import json
 from save_settings import set_value,_init,get_value,init_settings
 success("模块导入成功！")
@@ -14,7 +14,6 @@ info("正在检查配置文件！")
 '''
 检查配置文件是否存在
 '''
-
 sting=True
 if not os.path.isfile("settings.json"):
     with open("settings.json","w",encoding="utf-8") as f:
@@ -49,13 +48,9 @@ if not os.path.isfile("force.json"):
         json.dump(zzzz,ff,indent=4)
         f.close()
     sting=False
-if not os.path.isfile("botstart.bat"):
-    with open("botstart.bat","w",encoding="utf-8") as fff:
-        fff.write("start cmd /K \"billbot.exe\"")
-        fff.close()
-    sting=False
+
 if sting==False:
-    warning("首次启动该程序检测到有配置文件缺失，将会释放三个文件；请按照https://github.com/billma007/billmaqqbot 的配置文件进行配置。\n以后请使用释放的botstart.BAT安全脚本打开本程序！以后请使用释放的botstart.BAT安全脚本打开本程序！否则会造成意想不到的后果！！！\n请注意，不要修改本软件名字billbot.exe！！！")
+    warning("首次启动该程序检测到有配置文件缺失，将会释放三个文件；请按照https://github.com/billma007/billmaqqbot 的配置文件进行配置。")
     info("按任意键退出程序进行配置...")
     msvcrt.getch()
     os._exit(0)
@@ -184,7 +179,7 @@ if __name__=="__main__":
             sys.exit(0)
         except Exception as e:
             error("发生错误：")
-            print(e)
+            warning(traceback.format_exc())
             continue
 
 '''
