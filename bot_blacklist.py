@@ -2,9 +2,9 @@
 # -*- coding: utf-8 -*-
 
 import json
-from bot_debug import warning
 
-
+from bot_debug import warning,error
+from save_settings import set_value,get_value
 def  blacklist(qq):
     '''
     返回一个qq是不是黑名单
@@ -173,6 +173,80 @@ def delete_admin(msg,qq) -> str:
     except :
         return "删除失败：未知原因"
 
+def set_taboo(word) -> str:
+    '''
+    将某禁忌词语添加至设置
+    '''
+    word=str(word).replace(".bot","").replace("。bot","").replace("admin","").replace("set","").replace("add","").replace("delete","").replace("search","").replace(" ","").replace("+","").replace("taboo","").replace("bot","")
+    try:
+        f=open("remote_settings.json","r",encoding="utf-8")
+        ret=json.load(f)
+        f.close()
+        if  ret["taboo"]==None:
+             ret["taboo"]=[]
+        if word in ret["taboo"]:
+            return "该关键词已被收录"
+        else :
+            ret["taboo"].append(word)
+            g=open("remote_settings.json","w",encoding="utf-8")
+            json.dump(ret,g,indent=4)
+            return "成功添加该关键词。"
+    except:
+        error("管理员试图添加一个禁忌词，但是失败了")
+        return "添加失败：（"
+
+def del_taboo(word):
+    '''
+    将某禁忌词语删除至设置
+    '''
+    word=str(word).replace(".bot","").replace("。bot","").replace("admin","").replace("set","").replace("add","").replace("delete","").replace("search","").replace(" ","").replace("+","").replace("taboo","").replace("bot","")
+    try:
+        f=open("remote_settings.json","r",encoding="utf-8")
+        ret=json.load(f)
+        f.close()
+        if word not  in ret["taboo"]:
+            return "该关键词还不在禁忌词范围内"
+        else :
+
+            kkk=list(ret["taboo"].remove(word))
+            ret["taboo"]=kkk
+            g=open("remote_settings.json","w",encoding="utf-8")
+            json.dump(ret,g,indent=4)
+            return "成功添加该关键词。"
+    except:
+        error("管理员试图删除一个禁忌词，但是失败了")
+        return "删除失败：（"
+
+def get_taboo():
+    '''
+    将已经添加的禁忌词输出
+    '''
+    try:
+        f=open("remote_settings.json","r",encoding="utf-8")
+        ret=json.load(f)
+        f.close()
+        a="\n".join(ret["taboo"])
+        return a 
+        
+    except:
+        error("管理员试图查询禁忌词，但是失败了")
+        return "查询失败：（"    
+def judge_taboo(word):
+    '''
+    查询word是否包含禁忌词
+    返回布尔函数
+    '''
+    try:
+        f=open("remote_settings.json","r",encoding="utf-8")
+        ret=json.load(f)
+        f.close()
+        for ii in ret["taboo"]:
+            if ii in word:
+                return True
+        return False
+    except:
+        error("无法查询")
+        return False
 def adminlist(qq,msg) -> str:
     if adminreturn(qq=qq)==False:
         return "您没有权限进行这个操作。"
@@ -196,6 +270,15 @@ def adminlist(qq,msg) -> str:
                 msgreturn=msgreturn+str(delete_admin(msg,qq))
             elif "search" in msg:
                 msgreturn=msgreturn+str(printadminlist())
+            else:
+                msgreturn=msgreturn+"admin 指令错误"
+        elif "taboo" in msg:
+            if "add" in msg:
+                msgreturn=msgreturn+str(set_taboo(msg))
+            elif "delete" in msg or "remove" in msg:
+                msgreturn=msgreturn+str(del_taboo(msg))
+            elif "search" in msg:
+                msgreturn=msgreturn+str(get_taboo())
             else:
                 msgreturn=msgreturn+"admin 指令错误"
         return msgreturn

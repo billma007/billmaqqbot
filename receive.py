@@ -6,17 +6,13 @@ from bot_debug import info,success,warning,error
 import socket
 import json
 from save_settings import get_value
-try:
-    info("开始初始化监听端口...")
-    ListenSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    ListenSocket.bind((get_value("ip"), get_value("listen")))
-    ListenSocket.listen(100)
-    success("成功初始化监听端口：http://"+(str(get_value("ip"))+":"+str(get_value("listen"))))
-except:
-    error("初始化监听端口失败，请检查配置文件。")
-    info("按任意键退出程序进行配置。。。")
-    msvcrt.getch()
-    os._exit(0)
+
+info("开始初始化监听端口...")
+ListenSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+ListenSocket.bind((get_value("ip"), get_value("listen")))
+ListenSocket.listen(100)
+success("成功初始化监听端口：http://"+(str(get_value("ip"))+":"+str(get_value("listen"))))
+
     
 HttpResponseHeader = '''HTTP/1.1 200 OK\r\n
 Content-Type: text/html\r\n\r\n

@@ -1,6 +1,6 @@
 #!/usr/bin/python
-# -*- coding: utf-8 -*-
-
+# -*- coding: utf-8 -*
+from tqdm import tqdm
 from bot_debug import success,info,error,warning
 info("开始导入模块...")
 import msvcrt
@@ -9,6 +9,7 @@ from time import sleep
 import traceback
 import json
 from save_settings import set_value,_init,get_value,init_settings
+from bot_help import HELP
 success("模块导入成功！")
 info("正在检查配置文件！")
 '''
@@ -25,7 +26,6 @@ if not os.path.isfile("settings.json"):
     "guild"  : [["10264721650848156","5682529"]],
     "private": ["36937975","237103015"],
     "device" : "iphonr13.2",
-    "taboo"  : ["SB","nmd"]
 }
         json.dump(zzz,f,indent=4)
         f.close()
@@ -48,7 +48,6 @@ if not os.path.isfile("force.json"):
         json.dump(zzzz,ff,indent=4)
         f.close()
     sting=False
-
 if sting==False:
     warning("首次启动该程序检测到有配置文件缺失，将会释放三个文件；请按照https://github.com/billma007/billmaqqbot 的配置文件进行配置。")
     info("按任意键退出程序进行配置...")
@@ -58,18 +57,15 @@ success("配置文件检查成功！")
 '''
 初始化设置
 '''
-
 _init()
 init_settings()
-
 info("开始加载权限系统...")
 
 # receive and send message
 from send_msg import  changephone, send_msg_group, send_msg_guild,send_msg_private
 from receive import rev_msg
-
 from bot_changename import changename
-from bot_blacklist import adminlist, blacklist,superadmin
+from bot_blacklist import adminlist, blacklist,superadmin,judge_taboo
 success("权限系统加载成功！")
 info("开始加载plugin插件....")
 
@@ -83,6 +79,7 @@ from bot_plugin_dujitang import dujitang
 from bot_plugin_check import check
 from bot_plugin_arknight import arknightsanalysis
 from bot_plugin_historytoday import history_today
+from bot_plugin_qiandao import qiandaomain
 success("插件加载成功！")
 def analysisfunc(msg):
             '''
@@ -91,35 +88,36 @@ def analysisfunc(msg):
             msgsend="FATAL ERROR:0001(UNKNOWN ERROR)"
             if msg=="1234567890":
                 msgsend="对不起，您没有权限执行这个操作."
-            elif "jrrp" in msg:
+            elif "help" in msg:
+                msgsend=HELP()
+            elif "jrrp" in msg: #代号为1
                 msgsend=jrrp(msg)
-            elif "rc" in msg or "事件鉴定" in msg:
+            elif "rc" in msg or "事件鉴定" in msg:#代号为2
                 msgsend=check(msg)
-            elif "毒鸡汤" in msg:
+            elif "毒鸡汤" in msg:#代号为3
                 msgsend=dujitang()
-            elif "人生重开"  in msg:
+            elif "人生重开"  in msg:#代号为4
                 msgsend=lifemain()
-            elif "方舟寻访" in msg or "arknight" in msg:
+            elif "方舟寻访" in msg or "arknight" in msg:#代号为5
                 msgsend=arknightsanalysis(msg)
-            elif "下载音乐" in msg:
+            elif "下载音乐" in msg:#代号为6
                 msgsend=musicdown(msg)
-            elif "history-today" in msg or "历史上的今天" in msg:
+            elif "history-today" in msg or "历史上的今天" in msg:#代号为7
                 msgsend=history_today()
             elif "CQ:image" in msg:
                 msgsend='图片无法识别'
-            elif "狗屁不通" in msg:
+            elif "狗屁不通" in msg:#代号为8
                 msgsend=goupi_main(msg)
-            else:
+            else:#代号为9
                 msgsend=aitalk(msg)
-            for i in get_value("taboo"):
-                if i in msg:
-                    msgsend="对不起，您的话中含有非法字符。"
+            if judge_taboo(msg)==True:
+                msgsend="对不起，您的话中含有非法字符。"
             return msgsend
 
 
 if __name__=="__main__":
     success("程序启动成功！")
-    info("当前版本：1.0.0-rc12 Release")
+    info("当前版本：1.2.3 alpha")
 
     while True:
         try:
@@ -149,20 +147,24 @@ if __name__=="__main__":
                 else:
                     warning("管理权限使用失败：请在群聊内操作。")
                     raise Exception("管理权限使用失败：请在群聊内操作。")
+                continue
     #禁止黑名单操作
-            elif blacklist(rev['user_id'] )==True:
-                if rev['message_type']=="group" and ("。bot set" in rev["message"] or ".bot set" in rev["message"]):
-                    send_msg_group({'msg_type':'group','group_id':str(rev['group_id']),'msg':"您没有权限执行这个操作。"}    )
-                else:
-                    raise 
+            if blacklist(rev['user_id'] )==True:
+                msg="1234567890"
+    #过滤禁忌词
+            if judge_taboo(rev['message'])==True:
+                msg="1234567890"
     #群聊消息
-            elif rev['message_type']=='group':
+            if rev['message_type']=='group':
 
 
                 if str(rev['group_id']) in get_value("group"):
                     if ".bot" in rev['message'] or "。bot" in rev['message']:
                         msg=str(rev['message']).replace(".bot","").replace("。bot","")
-                        msgsend=analysisfunc(msg)
+                        if "signin" in msg:
+                            msgsend=qiandaomain(qun=rev['group_id'],qq=rev["user_id"],msg=msg.replace("signin",""))
+                        else:
+                            msgsend=analysisfunc(msg)
                         send_msg_group({'msg_type':'group','group_id':str(rev['group_id']),'msg':msgsend})
 
     #频道消息

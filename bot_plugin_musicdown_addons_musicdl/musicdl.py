@@ -206,14 +206,5 @@ def musicdlcmd(keyword, logfilepath, proxies, savedir, count, targets):
 
 '''run'''
 if __name__ == '__main__':
-    if not os.path.isfile("music_config.json"):
-        with open("music_config.json","w",encoding="utf-8") as a:
-            aaa={
-    "logfilepath": "musicdl.log",
-    "proxies": {},
-    "search_size_per_source": 5,
-    "savedir": "music"
-}
-            json.dump(aaa,a,indent=4)
-    dl_client = musicdl('music_config.json')
+    dl_client = musicdl('config.json')
     dl_client.run()

@@ -6,4 +6,4 @@ def aitalk(a):
             url='http://api.qingyunke.com/api.php?key=free&appid=0&msg=%s'%a
             te=requests.get(url).json()
             data=te['content']
-            return str(data.replace("{br}","\n").replace("梦想机器人","马哥聊天机器人").replace("www.xiami.com","")).replace("菲菲","机器人")
+            return str(data.replace("{br}","\n").replace("梦想机器人","聊天机器人").replace("www.xiami.com","")).replace("菲菲","机器人")
