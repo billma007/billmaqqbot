@@ -30,9 +30,9 @@ def set_value(key, value):
 def init_settings():
     try:
         info("开始导入设置 从settings.json中")
-        aaaaa=open("settings.json","r",encoding="utf-8")
-        aaa=json.load(aaaaa)
-        aaaaa.close()
+        with open(r"data\settings.json","r",encoding="utf-8") as aaaaa:
+            aaa=json.load(aaaaa)
+            aaaaa.close()
         set_value("listen"  ,aaa["listen"]  ) #监听端口 int
         set_value("send"    ,aaa["send"]    ) #发送端口 int
         set_value("device"  ,aaa["device"]  ) #设备名称 str

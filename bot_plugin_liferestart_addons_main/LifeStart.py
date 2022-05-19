@@ -1,7 +1,7 @@
 
 from bot_plugin_liferestart_addons_main.Life import Life,HandlerException
 returnit = ""
-Life.load('bot_plugin_liferestart_addons_main\\data')
+Life.load('data\\bot_plugin_liferestart_addons_main\\data')
 def add_return(info):
     global returnit
     returnit+=str(info)

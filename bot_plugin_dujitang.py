@@ -2,7 +2,7 @@ from urllib import request
 import random,json
 def dujitang() :
     try:
-        f=open("bot_ext_mingyan.json",encoding="utf-8")
+        f=open(r"data\bot_ext_mingyan.json",encoding="utf-8")
         sss=json.load(f)
         f.close()
         b=random.choice(sss["dujitang"])

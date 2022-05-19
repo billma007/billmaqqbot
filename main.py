@@ -1,7 +1,7 @@
-#!/usr/bin/python
 # -*- coding: utf-8 -*
-from tqdm import tqdm
 from bot_debug import success,info,error,warning
+from bot_plugin_wangyiyun import getwangyiyun
+
 info("开始导入模块...")
 import msvcrt
 import sys,os
@@ -10,50 +10,10 @@ import traceback
 import json
 from save_settings import set_value,_init,get_value,init_settings
 from bot_help import HELP
+import bot_checkdata
 success("模块导入成功！")
 info("正在检查配置文件！")
-'''
-检查配置文件是否存在
-'''
-sting=True
-if not os.path.isfile("settings.json"):
-    with open("settings.json","w",encoding="utf-8") as f:
-        zzz={
-    "listen" : 8000,
-    "send"   : 5700,
-    "ip"     : "127.0.0.1",
-    "group"  : ["834027482","820433165"],
-    "guild"  : [["10264721650848156","5682529"]],
-    "private": ["36937975","237103015"],
-    "device" : "iphonr13.2",
-}
-        json.dump(zzz,f,indent=4)
-        f.close()
-    sting=False
-if not os.path.isfile("force.json"):
-    with open("force.json","w",encoding="utf-8") as ff:
-        zzzz={
-    "blacklist": [],
-    "superadmin": [
-        "36937975",
-        "237103015",
-        "2981686635"
-    ],
-    "admin": [
-        "2981686635",
-        "964146474",
-        "36937975"
-    ]
-}
-        json.dump(zzzz,ff,indent=4)
-        f.close()
-    sting=False
-if sting==False:
-    warning("首次启动该程序检测到有配置文件缺失，将会释放三个文件；请按照https://github.com/billma007/billmaqqbot 的配置文件进行配置。")
-    info("按任意键退出程序进行配置...")
-    msvcrt.getch()
-    os._exit(0)
-success("配置文件检查成功！")
+bot_checkdata.checkit()
 '''
 初始化设置
 '''
@@ -80,11 +40,17 @@ from bot_plugin_check import check
 from bot_plugin_arknight import arknightsanalysis
 from bot_plugin_historytoday import history_today
 from bot_plugin_qiandao import qiandaomain
+from bot_plugin_whosays import whosays
+from bot_plugin_gaoxiaoyulu import getgaoxiaoyulu
+from bot_plugin_luxun import luxunshuoguo
+from bot_plugin_shenhuifu import getshenhuifu
+from bot_plugin_news import getnews
 success("插件加载成功！")
 def analysisfunc(msg):
             '''
             判断消息类型并处理
             '''
+            msg=msg.replace(".bot","").replace("。bot","")
             msgsend="FATAL ERROR:0001(UNKNOWN ERROR)"
             if msg=="1234567890":
                 msgsend="对不起，您没有权限执行这个操作."
@@ -92,6 +58,12 @@ def analysisfunc(msg):
                 msgsend=HELP()
             elif "jrrp" in msg: #代号为1
                 msgsend=jrrp(msg)
+            elif "鲁迅说过" in msg:
+                msgsend=luxunshuoguo()
+            elif "whosays" in msg:
+                msgsend=whosays(msg)
+            elif "getnews" in msg or "今日新闻" in msg:
+                msgsend=getnews()
             elif "rc" in msg or "事件鉴定" in msg:#代号为2
                 msgsend=check(msg)
             elif "毒鸡汤" in msg:#代号为3
@@ -108,6 +80,12 @@ def analysisfunc(msg):
                 msgsend='图片无法识别'
             elif "狗屁不通" in msg:#代号为8
                 msgsend=goupi_main(msg)
+            elif "神回复" in msg:
+                msgsend=getshenhuifu()
+            elif "搞笑语录" in msg:
+                msgsend=getgaoxiaoyulu()
+            elif "网易云热评" in msg:
+                msgsend=getwangyiyun()
             else:#代号为9
                 msgsend=aitalk(msg)
             if judge_taboo(msg)==True:
@@ -117,7 +95,7 @@ def analysisfunc(msg):
 
 if __name__=="__main__":
     success("程序启动成功！")
-    info("当前版本：1.2.3 alpha")
+    info("当前版本：1.4.0 alpha")
 
     while True:
         try:
