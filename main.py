@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*
 from bot_debug import success,info,error,warning
 from bot_plugin_wangyiyun import getwangyiyun
-
+import logging
 info("开始导入模块...")
 import msvcrt
 import sys,os

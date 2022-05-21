@@ -1,12 +1,37 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import ctypes
-from subprocess import STD_OUTPUT_HANDLE
-import time
+import platform
 
+SYSTEM=platform.system()
+
+import time
+class CommonColor():
+    GRAY=30
+    RED=31
+    GREEN=32
+    YELLOW=33
+    BLUE=34
+    MAGENTA=35
+    CYAN=36
+    WHITE=37
+    CRIMSON=38 
+
+def colorize(num):
+    if num==0x0a:
+        print("\033[92m",end='')
+    elif num==0x0b:
+        print("\033[94m",end='')
+    elif num==0x0f:
+        print("\033[0m",end='')
+    elif num==0x0b:
+        print("\033[93m",end='')
+    elif num==0x0c:
+        print("\033[91m",end='')
 '''
 在windows系统下可以通过修改底层来修改颜色
 '''
+
+
 class WindowsColor():
     FOREGROUND_BLACK = 0x00 # black.
     FOREGROUND_DARKBLUE = 0x01 # dark blue.
@@ -40,11 +65,19 @@ class WindowsColor():
     BACKGROUND_YELLOW = 0xe0 # yellow.
     BACKGROUND_WHITE = 0xf0 # white.
 
-std_out_handle = ctypes.windll.kernel32.GetStdHandle(STD_OUTPUT_HANDLE)
- 
-def set_cmd_text_color(color, handle=std_out_handle):
-    Bool = ctypes.windll.kernel32.SetConsoleTextAttribute(handle, color)
-    return Bool
+if SYSTEM=="Windows" or SYSTEM=="windows":
+    import ctypes
+    from subprocess import STD_OUTPUT_HANDLE
+    std_out_handle = ctypes.windll.kernel32.GetStdHandle(STD_OUTPUT_HANDLE)
+    
+def set_cmd_text_color(color):
+    if SYSTEM=="Windows" or SYSTEM=="windows":
+        handle=std_out_handle
+        import ctypes
+        Bool = ctypes.windll.kernel32.SetConsoleTextAttribute(handle, color)
+        return Bool
+    else:
+        colorize(color)
 def timenow():
                 local_times = time.localtime(time.time())
                 local_time_asctimes = time.asctime(local_times)

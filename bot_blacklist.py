@@ -10,7 +10,7 @@ def  blacklist(qq):
     返回一个qq是不是黑名单
     返回格式：bool
     '''
-    with open('data\\force.json','r',encoding='utf-8') as f :
+    with open('data/force.json','r',encoding='utf-8') as f :
         blacklist=json.load(f)
         f.close()
     if str(qq) in str(blacklist["blacklist"]):
@@ -23,7 +23,7 @@ def printblacklist():
     返回值：str
     '''
     try:
-        with open('data\\force.json','r',encoding='utf-8') as f :
+        with open('data/force.json','r',encoding='utf-8') as f :
             blacklist=json.load(f)
             f.close()
             returnit="\n".join(blacklist["blacklist"])
@@ -36,7 +36,7 @@ def printadminlist():
     返回值：str
     '''
     try:
-        with open('data\\force.json','r',encoding='utf-8') as f :
+        with open('data/force.json','r',encoding='utf-8') as f :
             blacklist=json.load(f)
             f.close()
             returnit="以下是超级管理员："
@@ -51,7 +51,7 @@ def superadmin(qq):
     判断某用户是否为超级管理员
     返回值：bool
     '''
-    f=open('data\\force.json','r',encoding='utf-8')
+    f=open('data/force.json','r',encoding='utf-8')
     superadmin=json.load(f)
     f.close()
     if str(qq) in str(superadmin["superadmin"]):
@@ -63,7 +63,7 @@ def adminreturn(qq):
     判断某用户是否为管理员(包括超级管理员)
     返回值：bool
     '''
-    with open('data\\force.json','r',encoding='utf-8') as f :
+    with open('data/force.json','r',encoding='utf-8') as f :
         superadmin=json.load(f)
         f.close()
     if str(qq) in str(superadmin["superadmin"]) or str(qq) in str(superadmin["admin"]):
@@ -76,7 +76,7 @@ def add_black(msg) -> str:
     入参：任意含有QQ的字符串
     '''
     try:
-        with open('data\\force.json','r',encoding='utf-8') as f :
+        with open('data/force.json','r',encoding='utf-8') as f :
             blacklist=json.load(f)
             f.close()
             blist=blacklist["blacklist"]
@@ -88,7 +88,7 @@ def add_black(msg) -> str:
             else:
                 blist.append(str(qqnum))
                 blacklist["blacklist"]=blist
-                a_file=open(r'data\force.json',"w")
+                a_file=open(r'data/force.json',"w")
                 json.dump(blacklist,a_file,indent=4)
                 a_file.close()
                 return "成功将"+str(qqnum)+"加入到黑名单"
@@ -101,7 +101,7 @@ def add_admin(msg,qq) -> str:
     入参：任意含有QQ的字符串
     '''
     try:
-        f=open(r'data\force.json','r',encoding='utf-8')
+        f=open(r'data/force.json','r',encoding='utf-8')
         adminlist=json.load(f)
         f.close()
         blist=adminlist["admin"]
@@ -115,7 +115,7 @@ def add_admin(msg,qq) -> str:
         else:
             blist.append(str(qqnum))
             adminlist["admin"]=blist
-            a_file=open(r'data\force.json',"w")
+            a_file=open(r'data/force.json',"w")
             json.dump(adminlist,a_file,indent=4)
             a_file.close()
             return "成功将"+str(qqnum)+"加入到管理"
@@ -130,7 +130,7 @@ def delete_black(msg) -> str:
     返回值：str
     '''
     try:
-        with open('data\\force.json','r',encoding='utf-8') as f :
+        with open('data/force.json','r',encoding='utf-8') as f :
             blacklist=json.load(f)
             f.close()
             blist=blacklist["blacklist"]
@@ -140,7 +140,7 @@ def delete_black(msg) -> str:
             else:
                 blist.remove(str(qqnum))
                 blacklist["blacklist"]=blist
-                a_file=open(r'data\force.json',"w")
+                a_file=open(r'data/force.json',"w")
                 json.dump(blacklist,a_file,indent=4)
                 a_file.close()
                 return "成功将"+str(qqnum)+"从黑名单删除"
@@ -154,7 +154,7 @@ def delete_admin(msg,qq) -> str:
     返回值：str
     '''
     try:
-        with open('data\\force.json','r',encoding='utf-8') as f :
+        with open('data/force.json','r',encoding='utf-8') as f :
             blacklist=json.load(f)
             f.close()
             blist=blacklist["admin"]
@@ -166,7 +166,7 @@ def delete_admin(msg,qq) -> str:
             else:
                 blist.remove(str(qqnum))
                 blacklist["admin"]=blist
-                a_file=open(r'data\force.json',"w")
+                a_file=open(r'data/force.json',"w")
                 json.dump(blacklist,a_file,indent=4)
                 a_file.close()
                 return "成功将"+str(qqnum)+"从管理员删除"
@@ -179,7 +179,7 @@ def set_taboo(word) -> str:
     '''
     word=str(word).replace(".bot","").replace("。bot","").replace("admin","").replace("set","").replace("add","").replace("delete","").replace("search","").replace(" ","").replace("+","").replace("taboo","").replace("bot","")
     try:
-        f=open(r"data\remote_settings.json","r",encoding="utf-8")
+        f=open(r"data/remote_settings.json","r",encoding="utf-8")
         ret=json.load(f)
         f.close()
         if  ret["taboo"]==None:
@@ -188,7 +188,7 @@ def set_taboo(word) -> str:
             return "该关键词已被收录"
         else :
             ret["taboo"].append(word)
-            g=open(r"data\remote_settings.json","w",encoding="utf-8")
+            g=open(r"data/remote_settings.json","w",encoding="utf-8")
             json.dump(ret,g,indent=4)
             return "成功添加该关键词。"
     except:
@@ -201,7 +201,7 @@ def del_taboo(word):
     '''
     word=str(word).replace(".bot","").replace("。bot","").replace("admin","").replace("set","").replace("add","").replace("delete","").replace("search","").replace(" ","").replace("+","").replace("taboo","").replace("bot","")
     try:
-        f=open(r"data\remote_settings.json","r",encoding="utf-8")
+        f=open(r"data/remote_settings.json","r",encoding="utf-8")
         ret=json.load(f)
         f.close()
         if word not  in ret["taboo"]:
@@ -210,7 +210,7 @@ def del_taboo(word):
 
             kkk=list(ret["taboo"].remove(word))
             ret["taboo"]=kkk
-            g=open(r"data\remote_settings.json","w",encoding="utf-8")
+            g=open(r"data/remote_settings.json","w",encoding="utf-8")
             json.dump(ret,g,indent=4)
             return "成功添加该关键词。"
     except:
@@ -222,7 +222,7 @@ def get_taboo():
     将已经添加的禁忌词输出
     '''
     try:
-        f=open(r"data\remote_settings.json","r",encoding="utf-8")
+        f=open(r"data/remote_settings.json","r",encoding="utf-8")
         ret=json.load(f)
         f.close()
         a="\n".join(ret["taboo"])
@@ -237,7 +237,7 @@ def judge_taboo(word):
     返回布尔函数
     '''
     try:
-        f=open(r"data\remote_settings.json","r",encoding="utf-8")
+        f=open(r"data/remote_settings.json","r",encoding="utf-8")
         ret=json.load(f)
         f.close()
         for ii in ret["taboo"]:

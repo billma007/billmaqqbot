@@ -4,7 +4,7 @@ import json
 
 def add(msg):
         msg=msg.replace(".bot","").replace("。bot","").replace("whosays","").   replace("add","")
-        ffffff=open(r"data\whosays.json","r",encoding="utf-8")
+        ffffff=open(r"data/whosays.json","r",encoding="utf-8")
         js=json.load(ffffff)
         ffffff.close()
         msgg=[x for x in msg.split(' ') if x]
@@ -14,7 +14,7 @@ def add(msg):
             js[msggg]+=msgg
         except:
             js[msggg]=msgg
-        with open(r"data\whosays.json","w",encoding="utf-8") as ffff:
+        with open(r"data/whosays.json","w",encoding="utf-8") as ffff:
             json.dump(js,ffff,indent=4,ensure_ascii=False)
             ffff.close()
         return "添加成功！"
@@ -22,7 +22,7 @@ def add(msg):
 def search(msg):
     try:
         msgg=msg.replace(".bot","").replace("。bot","").replace("whosays","").   replace("list","").replace(" ","")
-        ffffff=open(r"data\whosays.json","r",encoding="utf-8")
+        ffffff=open(r"data/whosays.json","r",encoding="utf-8")
         js=json.load(ffffff)
         ffffff.close()
         jjs=random.choice(js[msgg])

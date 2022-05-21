@@ -47,11 +47,11 @@ class ArkHeadhunt:
 
     @staticmethod
     def _get_agent_dict() -> dict:
-        if not exists(r'data\bot_plugin_arknight_addons_agent.json'):
-            with open(r'data\bot_plugin_arknight_addons_agent.json', 'w+', encoding='utf8') as file:
+        if not exists(r'data/bot_plugin_arknight_addons_agent.json'):
+            with open(r'data/bot_plugin_arknight_addons_agent.json', 'w+', encoding='utf8') as file:
                 dump({}, file, indent=4)
 
-        with open(r'data\bot_plugin_arknight_addons_agent.json', 'r', encoding='utf8') as file:
+        with open(r'data/bot_plugin_arknight_addons_agent.json', 'r', encoding='utf8') as file:
             agent_dict = loads(file.read())
 
         return agent_dict
@@ -137,7 +137,7 @@ class ArkHeadhunt:
         return f'干员{agent}不是{star}星或不在游戏内。'
 
     def update_content(self):
-        with open(r'data\bot_plugin_arknight_addons_agent.json', 'w+', encoding='utf8') as file:
+        with open(r'data/bot_plugin_arknight_addons_agent.json', 'w+', encoding='utf8') as file:
             dump(self.agent_dict, file, indent=4, ensure_ascii=False)
 
     def clear_ups(self):

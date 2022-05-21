@@ -5,49 +5,47 @@ from time import sleep
 import requests
 from bot_debug import error, info, success, warning
 datalist=[
-    r'data\bot_ext_mingyan.json',
-    r'data\bot_plugin_arknight_addons_agent.json',
-    r'data\dujitang.json',
-    r'data\gaoxiaoyulu.json',
-    r'data\goodreturn.json',
-    r'data\goupibutongdata.json',
-    r'data\luxun.json',
-    r'data\bot_plugin_liferestart_addons_main\data\achievement.json',
-    r'data\bot_plugin_liferestart_addons_main\data\age.json',
-    r'data\bot_plugin_liferestart_addons_main\data\events.json',
-    r'data\bot_plugin_liferestart_addons_main\data\talents.json',
-    r'data\wangyiyun.json'
+    r'data/bot_ext_mingyan.json',
+    r'data/bot_plugin_arknight_addons_agent.json',
+    r'data/dujitang.json',
+    r'data/gaoxiaoyulu.json',
+    r'data/goodreturn.json',
+    r'data/goupibutongdata.json',
+    r'data/luxun.json',
+    r'data/bot_plugin_liferestart_addons_main/data/achievement.json',
+    r'data/bot_plugin_liferestart_addons_main/data/age.json',
+    r'data/bot_plugin_liferestart_addons_main/data/events.json',
+    r'data/bot_plugin_liferestart_addons_main/data/talents.json',
+    r'data/wangyiyun.json'
 ]
 settingslist=[
-    r'data\whosays.json',
-    r'data\qiandao.json',
+    r'data/whosays.json',
+    r'data/qiandao.json',
 ]
 def downloaddata():
     if not os.path.isdir("data"):
         os.mkdir("data")
-    if not os.path.isdir("\\data\\bot_plugin_liferestart_addons_main\\data"):
+    if not os.path.isdir("/data/bot_plugin_liferestart_addons_main/data"):
         try:
-            os.mkdir("data\\bot_plugin_liferestart_addons_main")
+            os.mkdir("data/bot_plugin_liferestart_addons_main")
         except:pass
         try:
-            os.mkdir("data\\bot_plugin_liferestart_addons_main\\data")
+            os.mkdir("data/bot_plugin_liferestart_addons_main/data")
         except:pass
     for i in datalist:
         if not os.path.isfile(i):
             warning("注意：检测到文件"+i+"缺失，正在下载该文件.....")
             with open(i,"wb") as iii:
-                # try:
-                    url=r'https://fastly.jsdelivr.net/gh/billma007/billmaqqbot_datasave/'+i.replace("\\","/")
+                try:
+                    url=r'https://fastly.jsdelivr.net/gh/billma007/billmaqqbot_datasave/'+i
                     rr=requests.get(url)
                     iii.write(rr.content)
                     iii.close()
-                    '''
                 except:
                     iii.close()
                     error("连接失败，请前往https://github.com/billma007/billmaqqbot_datasave/ 或者 https://fastly.jsdelivr.net/gh/billma007/billmaqqbot_datasave/ 下载文件到本文件夹下data文件夹里")
                     msvcrt.getch()
                     os._exit(0x0)
-                    '''
             success("成功下载数据文件"+i)
             success("成功检查数据文件"+i)
         else:
@@ -61,8 +59,8 @@ def checkit():
                 clsss.write("{}")
                 clsss.close()
     sting=True
-    if not os.path.isfile(r'data\remote_settings.json'):
-        with open(r'data\remote_settings.json',"w",encoding="utf-8") as f:
+    if not os.path.isfile(r'data/remote_settings.json'):
+        with open(r'data/remote_settings.json',"w",encoding="utf-8") as f:
             zzzzz={
     "taboo": [
         "botSB",
@@ -72,8 +70,8 @@ def checkit():
 }
             json.dump(zzzzz,f,indent=4)
             f.close()
-    if not os.path.isfile(r"data\settings.json"):
-        with open(r"data\settings.json","w",encoding="utf-8") as f:
+    if not os.path.isfile(r"data/settings.json"):
+        with open(r"data/settings.json","w",encoding="utf-8") as f:
             zzz={
         "listen" : 8000,
         "send"   : 5700,
@@ -86,8 +84,8 @@ def checkit():
             json.dump(zzz,f,indent=4)
             f.close()
         sting=False
-    if not os.path.isfile(r"data\force.json"):
-        with open(r"data\force.json","w",encoding="utf-8") as ff:
+    if not os.path.isfile(r"data/force.json"):
+        with open(r"data/force.json","w",encoding="utf-8") as ff:
             zzzz={
         "blacklist": [],
         "superadmin": [

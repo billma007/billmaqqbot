@@ -14,7 +14,7 @@ def get_qiandao(qq,qun) -> int :
     '''
     获取某个QQ得到的积分（返回int值）
     '''
-    ff=open(r"data\qiandao.json","r")
+    ff=open(r"data/qiandao.json","r")
     fff=json.load(ff)
     ff.close()
     try:
@@ -26,7 +26,7 @@ def qiandao(qq,qun) -> str:
     '''
     签到主函数
     '''
-    ff=open(r"data\qiandao.json","r")
+    ff=open(r"data/qiandao.json","r")
     fff=json.load(ff)
     ff.close()
     try:
@@ -51,7 +51,7 @@ def qiandao(qq,qun) -> str:
         except:
             fff[str(qun)][str(qq)]=int(a)
         returnit="签到成功！"+str(qq)+"签到获得了"+str(a)+",现在你有积分"+str(fff[str(qun)][str(qq)])
-        with open(r"data\qiandao.json","w") as ffff:
+        with open(r"data/qiandao.json","w") as ffff:
             json.dump(fff,ffff,indent=4)
             ffff.close()
         return returnit
@@ -63,7 +63,7 @@ def dubo(qun,qq,msg) -> str:
     if money=="":
         return "请输入正确的数字！"
     money=int(money)
-    ff=open(r"data\qiandao.json","r")
+    ff=open(r"data/qiandao.json","r")
     fff=json.load(ff)
     ff.close()
     try:
@@ -94,7 +94,7 @@ def dubo(qun,qq,msg) -> str:
             own=own+money*50
             returnit="Congratulations!50倍返还！！！"
         fff[str(qun)][str(qq)]=int(own)
-    with open(r"data\qiandao.json","w") as ffff:
+    with open(r"data/qiandao.json","w") as ffff:
         json.dump(fff,ffff,indent=4)
         ffff.close()
     return returnit     
@@ -119,7 +119,7 @@ def admin_add(qun,adminqq,msg):
             num=int(qqlist[-1])
         except:
             return "参数格式输入错误"
-        ff=open(r"data\qiandao.json","r")
+        ff=open(r"data/qiandao.json","r")
         fff=json.load(ff)
         ff.close()
         try:
@@ -140,7 +140,7 @@ def admin_add(qun,adminqq,msg):
         except:
             fff[str(qun)][str(qq)]=int(a)
         returnit="添加成功！给"+str(qq)+"添加了"+str(a)+",现在ta有积分"+str(fff[str(qun)][str(qq)])
-        with open(r"data\qiandao.json","w") as ffff:
+        with open(r"data/qiandao.json","w") as ffff:
             json.dump(fff,ffff,indent=4)
             ffff.close()
         return returnit
@@ -155,7 +155,7 @@ def admin_delete(qun,adminqq,msg):
             num=int(qqlist[-1])
         except:
             return "参数格式输入错误"
-        ff=open(r"data\qiandao.json","r")
+        ff=open(r"data/qiandao.json","r")
         fff=json.load(ff)
         ff.close()
         try:
@@ -177,14 +177,14 @@ def admin_delete(qun,adminqq,msg):
             fff[str(qun)][str(qq)]=0
         if  fff[str(qun)][str(qq)]<=0: fff[str(qun)][str(qq)]=0
         returnit="删除成功现在ta有积分"+str(fff[str(qun)][str(qq)])
-        with open(r"data\qiandao.json","w") as ffff:
+        with open(r"data/qiandao.json","w") as ffff:
             json.dump(fff,ffff,indent=4)
             ffff.close()
         return returnit
 def caishuzi(qun,qq,msg) ->str :
     money=int(str(msg).split(" ")[-1].replace(" ",""))
     msgg=msg.replace(str(money),"")
-    ff=open(r"data\qiandao.json","r")
+    ff=open(r"data/qiandao.json","r")
     fff=json.load(ff)
     ff.close()
     try:
@@ -216,7 +216,7 @@ def caishuzi(qun,qq,msg) ->str :
             returnit+="猜对四个，奖金翻三倍！"
         else:
             return "发生未知数据错误"
-        with open(r"data\qiandao.json","w") as ffff:
+        with open(r"data/qiandao.json","w") as ffff:
             json.dump(fff,ffff,indent=4)
             ffff.close()
     return returnit     
