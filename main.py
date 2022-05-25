@@ -1,13 +1,10 @@
 # -*- coding: utf-8 -*
-from bot_debug import success,info,error,warning
+from bot_debug import success,info,error,warning,debug
 from bot_plugin_wangyiyun import getwangyiyun
-import logging
 info("开始导入模块...")
-import msvcrt
 import sys,os
 from time import sleep
 import traceback
-import json
 from save_settings import set_value,_init,get_value,init_settings
 from bot_help import HELP
 import bot_checkdata
@@ -95,7 +92,7 @@ def analysisfunc(msg):
 
 if __name__=="__main__":
     success("程序启动成功！")
-    info("当前版本：1.4.0 alpha")
+    info("当前版本：1.4.0 alpha3")
 
     while True:
         try:
@@ -116,6 +113,7 @@ if __name__=="__main__":
             rev = rev_msg()
             if rev == None:
                 continue
+            debug(rev)
             msgsend=""
     #管理权限
             if ("。bot set" in rev["message"] or ".bot set" in rev["message"] ) and rev['message_type']!='guild':
@@ -151,7 +149,7 @@ if __name__=="__main__":
                     msgsend=analysisfunc(rev['message'])
                     send_msg_guild({'msg_type':'guild','guild_id':rev["guild_id"],'channel_id': rev["channel_id"],  'msg':msgsend})
             elif rev['message_type']=='private':
-                if  "all" in get_value("private") or rev['user_id'] in get_value("private"):
+                if  "all" in get_value("private") or str(rev['user_id']) in str(get_value("private")):
                     msgsend=analysisfunc(rev['message'])
                     send_msg_private({'msg_type':'private','user_id':rev["user_id"],'msg':msgsend})
 

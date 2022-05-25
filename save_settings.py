@@ -1,11 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-from bot_debug import info,success,error,warning
+from bot_debug import info,success,error,warning,debug
 import json
-import msvcrt
 import traceback
 import os
-
+from bot_checkdata import pause_ter
 def _init():  # 初始化
     info("初始化设置中")
     global _global_dict
@@ -25,7 +24,7 @@ def set_value(key, value):
         print("=============================")
         error("导入设置失败，可能会导致程序无法正常运行。建议将已有配置文件删除，再次启动本程序，本程序会自动释放标准配置文件。待修改完毕后再启动本软件，本软件会自动读取。")
         info("按任意键退出程序进行配置。。。")
-        msvcrt.getch()
+        pause_ter()
         os._exit(0)
 def init_settings():
     try:
@@ -48,7 +47,7 @@ def init_settings():
         print("=============================")
         warning("导入设置失败，可能会导致程序无法正常运行。建议将已有配置文件删除，再次启动本程序，本程序会自动释放标准配置文件。待修改完毕后再启动本软件，本软件会自动读取。")
         info("按任意键退出程序进行配置。。。")
-        msvcrt.getch()
+        pause_ter()
         os._exit(0)
 def get_value(key):
     # 获得一个全局变量，不存在则提示读取对应变量失败
@@ -61,5 +60,5 @@ def get_value(key):
         print("=============================")
         warning("导入设置失败，可能会导致程序无法正常运行。建议将已有配置文件删除，再次启动本程序，本程序会自动释放标准配置文件。待修改完毕后再启动本软件，本软件会自动读取。")
         info("按任意键退出程序进行配置。。。")
-        msvcrt.getch()
+        pause_ter()
         os._exit(0)

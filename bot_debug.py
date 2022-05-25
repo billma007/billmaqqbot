@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import platform
-
+debugit=False
 SYSTEM=platform.system()
 
 import time
@@ -105,3 +105,6 @@ def warning(msg):
                 set_cmd_text_color(0x0e)
                 print("[WARNING]"+str(msg))
                 set_cmd_text_color(0x0f)
+def debug(msg):
+                if debugit==True:
+                    print(msg)

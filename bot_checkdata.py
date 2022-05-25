@@ -1,9 +1,25 @@
 import json
-import msvcrt
 import os
+import platform
+import sys
 from time import sleep
 import requests
 from bot_debug import error, info, success, warning
+SYSTEM=platform.system()
+
+def pause_ter():
+    if SYSTEM=="Windows" or SYSTEM=="windows":
+        import msvcrt
+        msvcrt.getch()
+    else:
+        import termios
+        fd = sys.stdin.fileno()
+        old_ttyinfo = termios.tcgetattr(fd)
+        new_ttyinfo = old_ttyinfo[:]
+        new_ttyinfo[3] &= ~termios.ICANON
+        new_ttyinfo[3] &= ~termios.ECHO
+        termios.tcsetattr(fd, termios.TCSANOW, new_ttyinfo)
+
 datalist=[
     r'data/bot_ext_mingyan.json',
     r'data/bot_plugin_arknight_addons_agent.json',
@@ -44,7 +60,7 @@ def downloaddata():
                 except:
                     iii.close()
                     error("连接失败，请前往https://github.com/billma007/billmaqqbot_datasave/ 或者 https://fastly.jsdelivr.net/gh/billma007/billmaqqbot_datasave/ 下载文件到本文件夹下data文件夹里")
-                    msvcrt.getch()
+                    pause_ter()
                     os._exit(0x0)
             success("成功下载数据文件"+i)
             success("成功检查数据文件"+i)
@@ -105,6 +121,6 @@ def checkit():
     if sting==False:
         warning("首次启动该程序检测到有配置文件缺失，将会释放三个文件；请按照https://github.com/billma007/billmaqqbot 的配置文件进行配置。")
         info("按任意键退出程序进行配置...")
-        msvcrt.getch()
+        pause_ter()
         os._exit(0)
     success("配置文件检查成功！")
