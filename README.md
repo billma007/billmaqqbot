@@ -4,11 +4,11 @@
 
 由go-cqhttp强力驱动。
 
-**官方网站**：https://billma.top/qqbot
+**官方网站**：<https://billma.top/qqbot>
 
-**帮助**：https://billma.top/qqbot/help
+**帮助**：<https://billma.top/qqbot/help>
 
-**一些问题**：https://billma.top/qqbot/faq
+**一些问题**：<https://billma.top/qqbot/faq>
 
 ~~（我想点开来看的人应该都是中国人吧所以我就不写英文文档了）~~
 
@@ -29,7 +29,7 @@
 
 ## 快速食用（Release版本）🍔
 
-**所有指令都在这里->>>>>https://billma.top/qqbot/help**
+**所有指令都在这里->>>>><https://billma.top/qqbot/help>**
 
 #### 1.下载go-cqhttp和本程序
 
@@ -168,8 +168,8 @@ servers:
             "guild_id": {
                 ".in": [
       21212121202020202,
-			23288238283828283,
-			39293923923928181
+   23288238283828283,
+   39293923923928181
                 ]
             }   
         }
@@ -178,9 +178,9 @@ servers:
             "message_type":"group",
             "group_id":{
                 ".in":[
-                  	273727372,
-                   	232323233,
-			              293929392
+                   273727372,
+                    232323233,
+                 293929392
                 ]
             }
 
@@ -249,7 +249,7 @@ private语法同group。特别的，如果你希望接受所有人发过来的�
 
 taboo里面可以填写禁忌字。如果用户输入含有这个列表里面的关键字，就会回复“含有关键词”。
 
-> 在1.4.0版本后，taboo设置移动到了remote_settings.json,可以通过远程指令添加删除。详情请见https://billma.top/qqbot/help
+> 在1.4.0版本后，taboo设置移动到了remote_settings.json,可以通过远程指令添加删除。详情请见<https://billma.top/qqbot/help>
 
 随后，先点击cqhttp.bat（由go-cqhttp生成），再启动本软件即可。
 
@@ -383,7 +383,7 @@ servers:
 
 ```
 
-#号后面的注释无需删除。需要注意，**每个冒号和后面的内容都需要一个空格！**
+# 号后面的注释无需删除。需要注意，**每个冒号和后面的内容都需要一个空格！**
 
 以上只需修改QQ账号和密码即可。
 
@@ -395,9 +395,9 @@ servers:
             "message_type": "guild",
             "guild_id": {
                 ".in": [
-                    	21212121202020202,
-			23288238283828283,
-			39293923923928181
+                     21212121202020202,
+   23288238283828283,
+   39293923923928181
                 ]
             }   
         }
@@ -406,9 +406,9 @@ servers:
             "message_type":"group",
             "group_id":{
                 ".in":[
-                  	273727372,
-                   	232323233,
-			293929392
+                   273727372,
+                    232323233,
+   293929392
                 ]
             }
 
@@ -480,7 +480,7 @@ servers:
 - `bot_plugin_jrrp.py侧人品`
 - `bot_plugin_liferestart.py`人生重开
 - `bot_plugin_musicdown.py`  下载音乐
-- `bot_plugin_check.py `事件鉴定
+- `bot_plugin_check.py`事件鉴定
 - `bot_plugin_whosays.py`名言添加
 - `bot_plugin_wangyiyun.py`
 - `bot_plugin_shenhuifu.py`
@@ -498,7 +498,7 @@ servers:
 
 ## 指令👍
 
-**完整指令列表请前往https://billma.top/qqbot/help ，这里仅展示部分指令！！！**
+**完整指令列表请前往<https://billma.top/qqbot/help> ，这里仅展示部分指令！！！**
 
 - `.bot arknights`明日方舟模拟抽卡
   - 默认2%，如果你想要~~安慰一下自己~~提高六星几率，你可以尝试：`.bot arknights 70`就可以将爆率提升到60%
@@ -604,6 +604,13 @@ servers:
   - 修改了在Linux中的终端操作
   - 修复了一些bug
   - 优化了对设置的导入检查
+- `2023/1/4 1.4.0re-alpha`:
+  - 对最新版本的go-cqhttp进行了适配
+  - 增加了2022年新增的明日方舟常驻干员并删除了限定干员
+  - 明日方舟模拟抽卡机制优化
+  - 部分功能优化
+  - 管理系统优化
+  - 对控制台输出进行优化
 
 ## 关于作者😁
 
@@ -611,11 +618,11 @@ servers:
 
 欢迎通过以下联系方式与我探讨信息竞赛、博客搭建、学术讨论以及扯皮：
 
-* QQ:36937975
-* Twitter:@billma6688
-* Facebook/Instagram:billma007
-* CodeForces/USACO/AtCoder:billma007(~别看我很拉的~不常用)
-* Email:[maboning237103015@163.com](mailto:maboning237103015@163.com)
+- QQ:36937975
+- Twitter:@billma6688
+- Facebook/Instagram:billma007
+- CodeForces/USACO/AtCoder:billma007(~别看我很拉的~不常用)
+- Email:[maboning237103015@163.com](mailto:maboning237103015@163.com)
 
 ## 推广：我的博客🤞
 
