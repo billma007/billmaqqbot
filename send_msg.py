@@ -121,3 +121,21 @@ def changephone(phone):
         client.send(payload.encode("utf-8"))
         client.close()
         return 0
+
+
+
+#test
+rev_test={'post_type': 'message', 
+'message_type': 'private', 
+'time': 1672740810, 
+'self_id': 1475326665, 
+'sub_type': 'friend', 
+'raw_message': '嗨害嗨', 
+'font': 0, 'sender': {'age': 0, 
+    'nickname': 'BillMa007', 
+    'sex': 'unknown', 
+    'user_id': 36937975}, 
+'message_id': -1363199072, 
+'user_id': 36937975, 
+'target_id': 1475326665, 
+'message': '嗨害嗨'}

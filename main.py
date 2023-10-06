@@ -115,6 +115,11 @@ if __name__=="__main__":
                 continue
             debug(rev)
             msgsend=""
+
+    #元信息相关处理
+            if rev["post_type"]=='meta_event':
+                debug(rev)
+                pass
     #管理权
 
             if rev["post_type"]=='message':
