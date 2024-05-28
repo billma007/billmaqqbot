@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*
 from bot_debug import success,info,error,warning,debug
 from bot_plugin_wangyiyun import getwangyiyun
+from receive import rev_msg
 info("开始导入模块...")
 import sys,os
 from time import sleep
@@ -19,8 +20,8 @@ init_settings()
 info("开始加载权限系统...")
 
 # receive and send message
-from send_msg import  changephone, send_msg_group, send_msg_guild,send_msg_private
-from receive import rev_msg
+from send_msg import  changephone, new_test, send_msg_group, send_msg_guild,send_msg_private
+#from receive import  rev_msg, root,data1
 from bot_changename import changename
 from bot_blacklist import adminlist, blacklist,superadmin,judge_taboo
 success("权限系统加载成功！")
@@ -93,11 +94,12 @@ def analysisfunc(msg):
 if __name__=="__main__":
     success("程序启动成功！")
     info("当前版本：1.4.0 alpha3")
-
+    data_rev={}
     while True:
+            
         try:
             info("正在连接http上报器...")
-            changephone("iphone13.2")
+            new_test()
             success("成功连接到http上报器。")
             break
         except:
@@ -115,16 +117,18 @@ if __name__=="__main__":
                 continue
             debug(rev)
             msgsend=""
-
     #元信息相关处理
             if rev["post_type"]=='meta_event':
                 debug(rev)
-                pass
+                continue
     #管理权
+            info(rev)
+            rev_msg_data=rev["message"][0]
+            if rev["post_type"]=='message' and rev_msg_data["type"]=='text':
 
-            if rev["post_type"]=='message':
-                if ("。bot set" in rev["message"] or ".bot set" in rev["message"] ) and rev['message_type']!='guild':
-                    msg=adminlist(rev['user_id'],rev['message'])
+                rev_message=rev_msg_data["data"]["text"]
+                if ("。bot set" in rev_message or ".bot set" in rev_message ) and rev['message_type']!='guild':
+                    msg=adminlist(rev['user_id'],rev_message)
                     if rev['message_type']=="group":
                         send_msg_group({'msg_type':'group','group_id':str(rev['group_id']),'msg':msg})
                     else:
@@ -135,14 +139,14 @@ if __name__=="__main__":
                 if blacklist(rev['user_id'] )==True:
                     msg="1234567890"
         #过滤禁忌词
-                if judge_taboo(rev['message'])==True:
+                if judge_taboo(rev_message)==True:
                     msg="1234567890"
         #群聊消息
                 if rev['message_type']=='group':
 
                     if str(rev['group_id']) in get_value("group"):
-                        if ".bot" in rev['message'] or "。bot" in rev['message']:
-                            msg=str(rev['message']).replace(".bot","").replace("。bot","")
+                        if ".bot" in rev_message or "。bot" in rev_message:
+                            msg=str(rev_message).replace(".bot","").replace("。bot","")
                             if "signin" in msg:
                                 msgsend=qiandaomain(qun=rev['group_id'],qq=rev["user_id"],msg=msg.replace("signin",""))
                             else:
@@ -152,11 +156,11 @@ if __name__=="__main__":
         #频道消息
                 elif  rev['message_type']=='guild' :
                     if [rev["guild_id"],rev['channel_id']] in get_value("guild"):
-                        msgsend=analysisfunc(rev['message'])
+                        msgsend=analysisfunc(rev_message)
                         send_msg_guild({'msg_type':'guild','guild_id':rev["guild_id"],'channel_id': rev["channel_id"],  'msg':msgsend})
                 elif rev['message_type']=='private':
                     if  "all" in get_value("private") or str(rev['user_id']) in str(get_value("private")):
-                        msgsend=analysisfunc(rev['message'])
+                        msgsend=analysisfunc(rev_message)
                         send_msg_private({'msg_type':'private','user_id':rev["user_id"],'msg':msgsend})
 
         except KeyboardInterrupt:
@@ -165,42 +169,3 @@ if __name__=="__main__":
             error("发生错误：")
             warning(traceback.format_exc())
             continue
-
-'''
-{'post_type': 'message', 
-'message_type': 'private', 
-'time': 1672740810, 
-'self_id': 1475326665, 
-'sub_type': 'friend', 
-'raw_message': '嗨害嗨', 
-'font': 0, 'sender': {'age': 0, 
-    'nickname': 'BillMa007', 
-    'sex': 'unknown', 
-    'user_id': 36937975}, 
-'message_id': -1363199072, 
-'user_id': 36937975, 
-'target_id': 1475326665, 
-'message': '嗨害嗨'}
-
-{'post_type': 'message', 
-'message_type': 'group', 
-'time': 1672742288, 
-'self_id': 1475326665, 
-'sub_type': 'normal', 
-'message_seq': 1878, 
-'font': 0, 'message': '.bot 你好', 
-'raw_message': '.bot 你好', 
-'sender': {'age': 0, 
-'area': '', 
-'card': '', 
-'level': '', 
-'nickname': 'BillMa007',
-'role': 'owner', 
-'sex': 'unknown', 
-'title': '', 
-'user_id': 36937975}, 
-'user_id': 36937975, 
-'message_id': -1352287257, 
-'anonymous': None, 
-'group_id': 784506492}
-'''
