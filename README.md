@@ -2,13 +2,15 @@
 
 一个十分~~简陋~~简洁的QQ机器人。不需要Nonebot或者Nonebot2的封装。
 
-由go-cqhttp强力驱动。
+~~由go-cqhttp强力驱动。~~
 
-**官方网站**：<https://billma.top/qqbot>
+**go-cqhttp的时代已经过去，go-cahttp项目对qq bot开源和发展起到了不可磨灭的作用。非常感谢go-cqhttp的贡献。**
 
-**帮助**：<https://billma.top/qqbot/help>
+**官方网站**：[https://billma.top/qqbot](https://billma.top/qqbot)
 
-**一些问题**：<https://billma.top/qqbot/faq>
+**帮助**：[https://billma.top/qqbot/help](https://billma.top/qqbot/help)
+
+**一些问题**：[https://billma.top/qqbot/faq](https://billma.top/qqbot/faq)
 
 ~~（我想点开来看的人应该都是中国人吧所以我就不写英文文档了）~~
 
@@ -29,7 +31,7 @@
 
 ## 快速食用（Release版本）🍔
 
-**所有指令都在这里->>>>><https://billma.top/qqbot/help>**
+**所有指令都在这里->>>>>[https://billma.top/qqbot/help](https://billma.top/qqbot/help)**
 
 #### 1.下载go-cqhttp和本程序
 
@@ -249,7 +251,7 @@ private语法同group。特别的，如果你希望接受所有人发过来的�
 
 taboo里面可以填写禁忌字。如果用户输入含有这个列表里面的关键字，就会回复“含有关键词”。
 
-> 在1.4.0版本后，taboo设置移动到了remote_settings.json,可以通过远程指令添加删除。详情请见<https://billma.top/qqbot/help>
+> 在1.4.0版本后，taboo设置移动到了remote_settings.json,可以通过远程指令添加删除。详情请见[https://billma.top/qqbot/help](https://billma.top/qqbot/help)
 
 随后，先点击cqhttp.bat（由go-cqhttp生成），再启动本软件即可。
 
@@ -498,7 +500,7 @@ servers:
 
 ## 指令👍
 
-**完整指令列表请前往<https://billma.top/qqbot/help> ，这里仅展示部分指令！！！**
+**完整指令列表请前往[https://billma.top/qqbot/help](https://billma.top/qqbot/help) ，这里仅展示部分指令！！！**
 
 - `.bot arknights`明日方舟模拟抽卡
   - 默认2%，如果你想要~~安慰一下自己~~提高六星几率，你可以尝试：`.bot arknights 70`就可以将爆率提升到60%
