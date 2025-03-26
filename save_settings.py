@@ -39,6 +39,8 @@ def init_settings():
         set_value("group"   ,aaa["group"]   ) #可用群聊 list[str]
         set_value("guild"   ,aaa["guild"]   ) #可用频道 list[list[guild_id(str),channal_id(str)]]
         set_value("private" ,aaa["private"] ) #聊天     list[str]
+        set_value("deepseekmode",aaa["deepseekmode"]) #DeepSeek模式 str
+        set_value("deepseekapi",aaa["deepseekapi"]) #DeepSeek API Key str
         success("成功导入所有设置！")
     except:
         error("致命错误：数据导入失败")

@@ -4,6 +4,7 @@ import random
 import time
 from json import loads, dump
 from os.path import exists
+import traceback
 from typing import Union
 
 
@@ -242,7 +243,7 @@ def arknightsmain(setit=2):
         returnit+=(api.__str__())
         return returnit
     except:
-        return "FATAL ERROR:寻访出错"
+        return traceback.format_exc()
 def arknightsanalysis(string):
     try:
         x = ''.join(filter(str.isdigit, string)).replace(" ","").replace("+","").replace(" ","")
@@ -252,7 +253,7 @@ def arknightsanalysis(string):
             xx=2
         return arknightsmain(setit=xx)
     except:
-        return "FATAL ERROR:寻访出错"
+        return traceback.format_exc()
 
 if __name__=="__main__":
-    print(arknightsanalysis("方舟寻访"))
+    print(arknightsanalysis("方舟寻访 2"))
