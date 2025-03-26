@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*
 from bot_debug import success,info,error,warning,debug
-from bot_plugin_wangyiyun import getwangyiyun
+
 from receive import rev_msg
 info("开始导入模块...")
 import sys,os
@@ -43,8 +43,13 @@ from bot_plugin_gaoxiaoyulu import getgaoxiaoyulu
 from bot_plugin_luxun import luxunshuoguo
 from bot_plugin_shenhuifu import getshenhuifu
 from bot_plugin_news import getnews
+from deepseek import deepseek_chat
+from bot_plugin_haiguitang import hgt_main
+from bot_plugin_wangyiyun import getwangyiyun
+from bot_plugin_jmcomic import jmchecheck
+deepseekmode=bool(get_value("deepseekmode"))
 success("插件加载成功！")
-def analysisfunc(msg):
+def analysisfunc(msg,group_id=None,private_id=None):
             '''
             判断消息类型并处理
             '''
@@ -52,6 +57,11 @@ def analysisfunc(msg):
             msgsend="FATAL ERROR:0001(UNKNOWN ERROR)"
             if msg=="1234567890":
                 msgsend="对不起，您没有权限执行这个操作."
+            elif "jmcomic" in msg:
+                if group_id!=None:
+                    msgsend=jmchecheck(msg,group_id)
+                else:
+                    msgsend="对不起，请在群聊操作."
             elif "help" in msg:
                 msgsend=HELP()
             elif "jrrp" in msg: #代号为1
@@ -84,8 +94,16 @@ def analysisfunc(msg):
                 msgsend=getgaoxiaoyulu()
             elif "网易云热评" in msg:
                 msgsend=getwangyiyun()
+            elif "海龟汤" in msg:
+                if deepseekmode==True:
+                    msgsend=hgt_main(msg, group_id)
+                else:
+                    msgsend="对不起，您没有开启这个功能。"
             else:#代号为9
-                msgsend=aitalk(msg)
+                if deepseekmode==True:
+                    msgsend=deepseek_chat(msg)
+                else:
+                    msgsend=aitalk(msg)
             if judge_taboo(msg)==True:
                 msgsend="对不起，您的话中含有非法字符。"
             return msgsend
@@ -150,7 +168,7 @@ if __name__=="__main__":
                             if "signin" in msg:
                                 msgsend=qiandaomain(qun=rev['group_id'],qq=rev["user_id"],msg=msg.replace("signin",""))
                             else:
-                                msgsend=analysisfunc(msg)
+                                msgsend=analysisfunc(msg,rev['group_id'])
                             send_msg_group({'msg_type':'group','group_id':str(rev['group_id']),'msg':msgsend})
 
         #频道消息

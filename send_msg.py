@@ -7,9 +7,10 @@ from time import sleep
 import requests
 from bot_debug import success,info,error
 from urllib.parse import quote,unquote
-from save_settings import get_value
+from save_settings import *
+send_port = str(get_value("send"))
 '''
-    requests.post('http://localhost:3000/send_private_msg',json={
+    requests.post('http://localhost:' + send_port +'/send_private_msg',json={
         'user_id': 36937975,
         'message': [{
             'type': 'text',
@@ -56,7 +57,7 @@ def send_msg_guild(resp_dict):
         return 0
 
 def send_msg_group(resp_dict):
-        requests.post('http://localhost:3000/send_group_msg',json={
+        requests.post('http://localhost:' + send_port +'/send_group_msg',json={
     'group_id': resp_dict['group_id'],
     'message': [{
         'type': 'text',
@@ -136,7 +137,7 @@ def send_msg_private(resp_dict):
         success("发送成功！")
         return 0
         '''
-    requests.post('http://localhost:3000/send_private_msg',json={
+    requests.post('http://localhost:' + send_port +'/send_private_msg',json={
     'user_id': resp_dict['user_id'],
     'message': [{
         'type': 'text',
@@ -161,7 +162,7 @@ def changephone(phone):
 
 
 def new_test():
-    requests.post('http://localhost:3000/send_private_msg',json={
+    requests.post('http://localhost:' + send_port +'/send_private_msg',json={
         'user_id': 36937975,
         'message': [{
             'type': 'text',
@@ -170,6 +171,17 @@ def new_test():
             }
         }]
     })
+
+
+def send_msg_jm(jm_folder,group_id,id):
+
+    requests.post('http://localhost:' + send_port +'/upload_group_file',json={
+        'group_id': group_id,
+        'file': jm_folder,
+        'name': str(id)+".pdf"
+    })
+
+
 
 #test
 rev_test={
