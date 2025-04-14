@@ -6,13 +6,28 @@
 
 **go-cqhttp的时代已经过去，go-cahttp项目对qq bot开源和发展起到了不可磨灭的作用。非常感谢go-cqhttp的贡献。**
 
+<<<<<<< HEAD
 **官方网站**：http://qqbot.billma.top
 
+=======
+可以使用
+
+**官方网站**：[https://billma.top/qqbot](https://billma.top/qqbot)
+
+**帮助**：[https://billma.top/qqbot/help](https://billma.top/qqbot/help)
+
+**一些问题**：[https://billma.top/qqbot/faq](https://billma.top/qqbot/faq)
+
+>>>>>>> 364baa1015e567ab3044c998fcf7d2347e590bb9
 优点
 
 - 不需要任何机器人框架的封装(~~特指Nonebot~~),语言简单易懂，小白也能看懂(~~毕竟作者本人也是小白~~)
 - 几乎不依赖任何第三方requirements,唯一需要依赖的库就是requests
+<<<<<<< HEAD
   - 如果您需要
+=======
+  - ~~colorama去死吧~~
+>>>>>>> 364baa1015e567ab3044c998fcf7d2347e590bb9
 - 无需调试，开箱即用
 - 日志清晰，颜色鲜明
 - 完全兼容OneBot标准
@@ -23,7 +38,13 @@
 - ~~很沙雕~~
 - 兼容Linux和Unit(macOS)
 
+<<<<<<< HEAD
 ## NAPCAT快速使用
+=======
+## go-cqhhtp的快速食用（Release版本）🍔
+
+**因为目前由于QQ官方针对协议库的围追堵截, go-cqhttp不再维护此项目. 此条方法废弃。**
+>>>>>>> 364baa1015e567ab3044c998fcf7d2347e590bb9
 
 详见https://github.com/NapNeko/NapCatQQ
 
