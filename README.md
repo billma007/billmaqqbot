@@ -6,19 +6,13 @@
 
 **go-cqhttp的时代已经过去，go-cahttp项目对qq bot开源和发展起到了不可磨灭的作用。非常感谢go-cqhttp的贡献。**
 
-可以使用
-
-**官方网站**：[https://billma.top/qqbot](https://billma.top/qqbot)
-
-**帮助**：[https://billma.top/qqbot/help](https://billma.top/qqbot/help)
-
-**一些问题**：[https://billma.top/qqbot/faq](https://billma.top/qqbot/faq)
+**官方网站**：http://qqbot.billma.top
 
 优点
 
 - 不需要任何机器人框架的封装(~~特指Nonebot~~),语言简单易懂，小白也能看懂(~~毕竟作者本人也是小白~~)
 - 几乎不依赖任何第三方requirements,唯一需要依赖的库就是requests
-  - ~~colorama去死吧~~
+  - 如果您需要
 - 无需调试，开箱即用
 - 日志清晰，颜色鲜明
 - 完全兼容OneBot标准
@@ -29,11 +23,15 @@
 - ~~很沙雕~~
 - 兼容Linux和Unit(macOS)
 
+## NAPCAT快速使用
+
+详见https://github.com/NapNeko/NapCatQQ
+
 ## go-cqhhtp的快速食用（Release版本）🍔
 
-**因为目前由于QQ官方针对协议库的围追堵截, go-cqhttp不再维护此项目. 此条方法废弃。**
+**因为目前由于一些原因, go-cqhttp不再维护此项目. 此条方法废弃。**
 
-**所有指令都在这里->>>>>[https://billma.top/qqbot/help](https://billma.top/qqbot/help)**
+**所有指令都在这里->>>>>**
 
 #### 1.下载go-cqhttp和本程序
 
@@ -581,14 +579,14 @@ servers:
   - 优化了静态文件存储
   - 优化了相关日志输出
 - `2022/5/11 1.2.01 alpha`:
-  - 新增赌博功能
-    - 赌博有害身心健康，仅供娱乐，切勿与真实金钱挂钩
+  - 新增彩票功能
+    - 仅供娱乐，切勿与真实金钱挂钩
   - 优化权限系统
   - 新增签到
   - 新增积分系统
 - `2022/5/19 1.4.0alpha`:
   - 新增多种功能
-  - 修复了赌博系统的bug
+  - 修复了彩票系统的bug
   - 新增名言录入功能
   - 新增查询功能
   - 新增数据库
@@ -620,6 +618,12 @@ servers:
   - 根据腾讯公司对qq的限制，做出了更新
   - 更改收发格式以适配qq
   - 删除了一些过去时代遗留的产物
+- `2024/11/1 1.5.0`:
+  - 放弃go-cqhttp，适配最新的onebot标准
+  - 增加“海龟汤”“解答”功能，通过deepseek提示词进行功能迭代
+  - 结束对频道的支持
+- `2025/3/1 1.5.1`:
+  - 对部分功能进行重构，优化代码结构
 
 ## 关于作者😁
 
