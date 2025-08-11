@@ -1,14 +1,10 @@
 {
-    "listen": 3000,
-    "send": 5700,
+    "listen": 7654,
+    "send": 3000,
     "ip": "127.0.0.1",
     "group": [
-        "834027482",
-        "820433165",
-        "784506492",
-        "814057281",
-        "765364137",
-        "771330735"
+        "12345",
+        "23456"
         
     ],
     "guild": [
@@ -20,14 +16,9 @@
     "private": [
         "all"
     ],
-    "device": "iphonr13.2",
+    "device": "iphone13.2",
     "notice": true,
     "deepseekmode": true, 
-    "deepseekapi" : "sk-8d3e30510ed84b28a07eb8526fae2962" 
+    "deepseekapi" : "sk-??????????????????" 
     
-<<<<<<< HEAD
 }
-
-=======
-}
->>>>>>> 364baa1015e567ab3044c998fcf7d2347e590bb9

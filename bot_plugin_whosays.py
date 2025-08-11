@@ -1,5 +1,6 @@
 import random
-from bot_debug import error
+import traceback
+from bot_debug import error, warning
 import json
 
 def add(msg):
@@ -29,6 +30,7 @@ def search(msg):
         return msgg+"曾经说过，"+jjs
 
     except:
+        warning(traceback.format_exc())
         return "查询失败"
 
 def whosays(msg):

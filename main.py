@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*
 from bot_debug import success,info,error,warning,debug
 
-from receive import rev_msg
+
 info("开始导入模块...")
 import sys,os
 from time import sleep
@@ -17,6 +17,7 @@ bot_checkdata.checkit()
 '''
 _init()
 init_settings()
+from receive import rev_msg
 info("开始加载权限系统...")
 
 # receive and send message
@@ -46,7 +47,7 @@ from bot_plugin_news import getnews
 from deepseek import deepseek_chat
 from bot_plugin_haiguitang import hgt_main
 from bot_plugin_wangyiyun import getwangyiyun
-from bot_plugin_jmcomic import jmchecheck
+from bot_plugin_jmdownaction import jm_out_main
 deepseekmode=bool(get_value("deepseekmode"))
 success("插件加载成功！")
 def analysisfunc(msg,group_id=None,private_id=None):
@@ -59,7 +60,7 @@ def analysisfunc(msg,group_id=None,private_id=None):
                 msgsend="对不起，您没有权限执行这个操作."
             elif "jmcomic" in msg:
                 if group_id!=None:
-                    msgsend=jmchecheck(msg,group_id)
+                    msgsend=jm_out_main(msg,group_id)
                 else:
                     msgsend="对不起，请在群聊操作."
             elif "help" in msg:
@@ -133,16 +134,16 @@ if __name__=="__main__":
             rev = rev_msg()
             if rev == None:
                 continue
-            debug(rev)
+            warning(rev)
             msgsend=""
     #元信息相关处理
             if rev["post_type"]=='meta_event':
                 debug(rev)
                 continue
     #管理权
-            info(rev)
+            #info(rev)
             rev_msg_data=rev["message"][0]
-            if rev["post_type"]=='message' and rev_msg_data["type"]=='text':
+            if rev_msg_data["type"]=='text':
 
                 rev_message=rev_msg_data["data"]["text"]
                 if ("。bot set" in rev_message or ".bot set" in rev_message ) and rev['message_type']!='guild':

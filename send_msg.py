@@ -8,11 +8,7 @@ import requests
 from bot_debug import success,info,error
 from urllib.parse import quote,unquote
 from save_settings import *
-<<<<<<< HEAD
 send_port = str(get_value("send"))
-=======
-send_port = str(get_value("listen"))
->>>>>>> 364baa1015e567ab3044c998fcf7d2347e590bb9
 '''
     requests.post('http://localhost:' + send_port +'/send_private_msg',json={
         'user_id': 36937975,
