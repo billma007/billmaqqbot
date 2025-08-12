@@ -4,7 +4,12 @@ from bot_debug import error, warning
 import json
 
 def add(msg):
-        msg=msg.replace(".bot","").replace("。bot","").replace("whosays","").   replace("add","")
+        msg = (
+            msg.replace(".bot", "")
+               .replace("。bot", "")
+               .replace("whosays", "")
+               .replace("add", "")
+        )
         ffffff=open(r"data/whosays.json","r",encoding="utf-8")
         js=json.load(ffffff)
         ffffff.close()
@@ -17,7 +22,6 @@ def add(msg):
             js[msggg]=msgg
         with open(r"data/whosays.json","w",encoding="utf-8") as ffff:
             json.dump(js,ffff,indent=4,ensure_ascii=False)
-            ffff.close()
         return "添加成功！"
         
 def search(msg):

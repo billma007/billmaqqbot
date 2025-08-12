@@ -6,10 +6,6 @@
 
 **go-cqhttp的时代已经过去，go-cahttp项目对qq bot开源和发展起到了不可磨灭的作用。非常感谢go-cqhttp的贡献。**
 
-<<<<<<< HEAD
-**官方网站**：http://qqbot.billma.top
-
-=======
 可以使用
 
 **官方网站**：[https://billma.top/qqbot](https://billma.top/qqbot)
@@ -18,16 +14,11 @@
 
 **一些问题**：[https://billma.top/qqbot/faq](https://billma.top/qqbot/faq)
 
->>>>>>> 364baa1015e567ab3044c998fcf7d2347e590bb9
 优点
 
 - 不需要任何机器人框架的封装(~~特指Nonebot~~),语言简单易懂，小白也能看懂(~~毕竟作者本人也是小白~~)
 - 几乎不依赖任何第三方requirements,唯一需要依赖的库就是requests
-<<<<<<< HEAD
-  - 如果您需要
-=======
-  - ~~colorama去死吧~~
->>>>>>> 364baa1015e567ab3044c998fcf7d2347e590bb9
+  - 如果您需要deepseek-chat或者jmcomic则缺啥补啥。
 - 无需调试，开箱即用
 - 日志清晰，颜色鲜明
 - 完全兼容OneBot标准
@@ -36,23 +27,119 @@
 - 可以设置和过滤指定群和私聊、频道消息
 - 可以设置指定IP，端口
 - ~~很沙雕~~
-- 兼容Linux和Unit(macOS)
+- 兼容Linux和macOS
 
-<<<<<<< HEAD
-## NAPCAT快速使用
-=======
+## napcat.shell的快速使用
+
+https://napneko.github.io/guide/boot/Shell，下载最新版NTQQ和napcat.shell的windows或linux
+
+随后clone本库：
+
+```shell
+git clone https://github.com/billma007/billmaqqbot.git
+```
+
+解压napcat.shell，打开launcher.bat（或者linux直接执行指令），找到这一句话：
+
+```echo
+08-11 21:29:09 [info] [NapCat] [WebUi] WebUi Local Panel Url: http://127.0.0.1:6099/webui?token=napcat
+```
+
+>强烈建议下面的修改部分使用Visual Studio **Code** 修改。必须全程使用英文输入法！
+
+点开这个网址，点开“网络配置”，新建一个http服务器和http客户端，然后打开billmaqqbot/data/settings.json，找到这边：
+
+```
+    "listen": 7654,
+    "send": 3000,
+```
+
+这边的listen的端口需要和网页的http服务端相同，send则粗腰和客户端相同，可以自行设置。
+
+下面是配置方法：(配置的时候把注释删掉)
+
+```json
+{
+    "listen": 7654, 
+    "send": 3000,
+    "ip": "127.0.0.1",  
+    "group": [
+        "12345",
+        "23456"
+        
+    ],    //qq群过滤器，只接受这些群。如果需要接收全部信息则改成"all"
+    "guild": [
+        [
+            "10264721650848156",
+            "5682529"
+        ]
+    ],   //qq频道，年久失修可能有bug
+    "private": [
+        "all"
+    ],//qq私聊过滤器，同上
+    "device": "iphone13.2", //废弃
+    "notice": true, //废弃
+    "deepseekmode": true, //是否使用deepseek api，若使用则需填写下面的token，否则将用智障ai回答内容。
+    "deepseekapi" : "sk-??????????????????"  //请前往deepseek官网的api开放平台获取token
+    
+}
+```
+
+如果您希望使用jmcomic下载功能，还需要进行以下步骤：
+
+访问下面这个网址：：https://github.com/hect0x7/JMComic-Crawler-Python/fork，直接fork，然后打开fork完毕的仓库，选择Action，开启action
+
+随后在 GitHub 获取一个可用的 **Personal Access Token (classic)**，并勾选必要权限：
+
+1. GitHub 首页 → 右上角头像 **Settings**  
+2. 左侧底部 **Developer settings** → **Personal access tokens** → **Tokens (classic)**  
+3. **Generate new token (classic)**  
+4. 设置名称与有效期  
+5. **权限**务必勾选：`workflow: Update GitHub Action workflows`  
+6. 生成后**保存** token（后续在配置中使用）
+
+> **提示**：该 token 将用于通过 GitHub API 触发与管理工作流。请注意保密，不要将 token 提交到公共仓库。
+
+然后打开billmaqqbot/bot_plugin_jmdownloadaction.py,找到并修改如下部分：
+
+```python
+def jm_out_main(jmnumber,groupnumber):
+    jmnumber=only_digits(jmnumber)
+    _jmconfig={
+  "token": "YourAccessToken",       # 填写你的token
+  "owner": "YourGithubAccount",     # 填写你的GitHub账号
+  "repo": "JMComic-Crawler-Python",
+  "workflow_file": "download_dispatch.yml",
+  "ref": "master",
+  "inputs": {
+    "JM_ALBUM_IDS": jmnumber,
+    "JM_PHOTO_IDS": "",
+    "CLIENT_IMPL": "",
+    "IMAGE_SUFFIX": "jpg",
+    "DIR_RULE": "",
+    "ZIP_NAME": f"{jmnumber}.zip",
+    "UPLOAD_NAME": f"{jmnumber}.zip"
+  },
+  "output_dir": "jmdownloads",
+  "poll": {
+    "find_run_timeout_sec": 180,
+    "find_run_interval_sec": 3,
+    "run_timeout_sec": 7200,
+    "run_poll_interval_sec": 10
+  }
+}
+```
+
+**费用**  
+- 运行 GitHub Actions **会产生费用**。一般来讲一次下载约 **0.007 USD**（约 **¥0.05 RMB**）。
+- 你可以在 GitHub 账户中**充值**，或申请 **GitHub Education**，一般每月可获得 **$24** 的额度减免。
+- GitHub education地址： [GitHub education](https://education.github.com/)
+
 ## go-cqhhtp的快速食用（Release版本）🍔
 
 **因为目前由于QQ官方针对协议库的围追堵截, go-cqhttp不再维护此项目. 此条方法废弃。**
->>>>>>> 364baa1015e567ab3044c998fcf7d2347e590bb9
 
 详见https://github.com/NapNeko/NapCatQQ
-
-## go-cqhhtp的快速食用（Release版本）🍔
-
-**因为目前由于一些原因, go-cqhttp不再维护此项目. 此条方法废弃。**
-
-**所有指令都在这里->>>>>**
 
 #### 1.下载go-cqhttp和本程序
 
@@ -500,7 +587,7 @@ servers:
 - `bot_plugin_aitalk.py` 只能聊天
 - `bot_plugin_dujitang.py`毒鸡汤
 - `bot_plugin_goupibutong.py`生成狗屁不通文章
-- `bot_plugin_jrrp.py侧人品`
+- `bot_plugin_jrrp.py`今日人品
 - `bot_plugin_liferestart.py`人生重开
 - `bot_plugin_musicdown.py`  下载音乐
 - `bot_plugin_check.py`事件鉴定
@@ -510,10 +597,14 @@ servers:
 - `bot_plugin_qiandao.py`
 - `bot_plugin_news.py`
 - `bot_plugin_luxun.py`
+- `bot_plugin_deepseek.py`
+- `bot_plugin_jmdownaction.py`
 
 ### 改变明日方舟抽卡up
 
 前往 `bot_plugin_arknight_addons_agent.json`，拉到最下面，改变up即可。
+
+数据集太久没更新了，废掉了。
 
 ### 增加功能
 
@@ -540,6 +631,7 @@ servers:
   - 详情[点这里了解更多](https://billma.top/qqbot/help)
 - 此外，`.bot`  后面直接加句子可以获得聊天功能
   - 这玩意很贱的（bushi
+- `.bot jmcomic xxxxxx` 下载本子。需要进行相关配置
 
 ## 管理指令🎉
 
@@ -564,7 +656,6 @@ servers:
   - windows10
   - python 3.8.5-64bits
   - Visual Studio Code 2022
-  - go-cqhttp windows_amd64
 
 ## 使用的开源库❤
 
@@ -635,7 +726,7 @@ servers:
   - 管理系统优化
   - 对控制台输出进行优化
 - `2023/10/5 1.4.1`:
-  - 高考完，对最新的go-cqhttp进行了适配
+  - 对最新的go-cqhttp进行了适配
   - 根据腾讯公司对qq的限制，做出了更新
   - 更改收发格式以适配qq
   - 删除了一些过去时代遗留的产物
@@ -645,7 +736,9 @@ servers:
   - 结束对频道的支持
 - `2025/3/1 1.5.1`:
   - 对部分功能进行重构，优化代码结构
-
+- `2025/8/11 1.6`
+  - 增加jmcomic下载功能
+  - 适配最新的onebot标准
 ## 关于作者😁
 
 江苏省苏州市的一个普通高中牲，一个在省赛就被刷下来的信息学奥林匹克竞赛选手。
